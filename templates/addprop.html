@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<section id="aa-property-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-property-header-inner">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+  <!-- End Proerty header  -->
+
+  <!-- Start Properties  -->
+  <section id="aa-properties">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-properties-content">            
+            <!-- Start properties content body -->
+            <div class="aa-properties-details">
+             <div id="prop-form" class="aa-properties-info">
+                <div id="csrf-token">{% csrf_token %}</div>
+                    <h1>Flat Details Form</h1>
+                    
+                    <label for="flat_pics">Flat Pictures:</label>
+                    <input type="file" class="flat_pics" id="flat_pics" name="flat_pics" accept="image/*" multiple required>
+                    
+                    <label for="location">Name:</label>
+                    <input type="text" id="flat_name" name="flat_name" required>
+
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" required>
+
+                    <label for="rent">Rent:</label>
+                    <input type="text" id="rent" name="rent" required>
+
+                    <div id="checkbox-div" style="margin-top:9px; margin-bottom: 10px;">
+                      <label for="furnishing">Select furnishing:</label><br>
+
+                      <input type="radio" id="furnishing" name="furnishing" value="3">
+                      <label for="furnishing">unfurnished</label><br>
+
+                      <input type="radio" id="semi-furnishing" name="furnishing" value="1">
+                      <label for="furnishing">Semi-furnished</label><br>
+
+
+                      <input type="radio" id="fully-furnishing" name="furnishing" value="1">
+                      <label for="furnishing">Fully-furnished</label><br>
+                    </div>
+                    
+                    <label for="amenities">Amenities:</label>
+                    <textarea id="amenities" name="amenities"></textarea>
+
+                    
+                    <label for="contact_name">Contact Name:</label>
+                    <input type="text" id="contact_name" name="contact_name" required>
+                    
+                    <label for="contact_name">Contact:</label>
+                    <input type="text" id="contact_no" name="contact_no" required>
+
+                    <input id="submit-btn" onclick="submitform()" type="submit" value="Submit">
+                    <div id="error-message" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
+                      Please try again!
+                    </div>
+             </div>
+            </div>           
+          </div>
+        </div>
+        <!-- Start properties sidebar -->
+        
+      </div>
+    </div>
+  </section>
+    <script>
+        function submitform(){
+            var form_ele = document.getElementById("prop-form")
+            form_ele.style.opacity = 0.2
+            document.getElementById("submit-btn").disabled = true
+            console.log("disable")
+            var flat_name = document.getElementById("flat_name").value
+            var location = document.getElementById("location").value
+            var amenities = document.getElementById("amenities").value
+            var contact_name = document.getElementById("contact_name").value
+            var contact_no = document.getElementById("contact_no").value
+            var rent = document.getElementById("rent").value
+            // var furnishing = document.getElementById("furnishing").value
+
+            var furn = $("input[type='radio'][name='furnishing']:checked").val();
+
+            console.log(furn)
+           
+
+
+            const imageList = document.querySelectorAll('#flat_pics')
+            // let image = imageList.files[0]
+            
+
+
+            const formData = new FormData();
+
+            // formData.append('flat_pics', image)
+            
+            var imageListData = []
+            for (let i = 0; i < imageList[0].files.length; i++) {
+                // console.log(imageList)
+                let image = imageList[0].files[i]
+                var timestamp = new Date().getTime();
+                let uniqueFileName = timestamp + '-' + image.name;
+                imageListData.push(image)
+                formData.append('flat_pics', image, uniqueFileName);
+              }
+
+            const csrfTokenParentEle = document.getElementById('csrf-token').children;
+
+            const csrfToken = csrfTokenParentEle[0].value   
+
+            // formData.append('flat_pics', imageListData);
+            formData.append('flat_name', flat_name.toString());
+            formData.append('location', location.toString());
+            formData.append('amenities', amenities.toString());
+            formData.append('contact_name', contact_name.toString());
+            formData.append('contact_no', contact_no.toString());
+            formData.append('rent', rent.toString());
+            formData.append('furnishing', furn.toString());
+
+
+
+         
+            $.ajax({
+               type: "POST",
+               url: "/submitprop/",
+               headers: {
+                'X-CSRFToken': csrfToken // Include the CSRF token in the request headers
+              },
+                data: formData,
+                contentType: false,
+                processData: false,
+               
+            //    processData: false,
+            //    contentType: false,
+               success: function(data){
+                console.log(data['message'])
+                  if (data['message']=='Success'){
+                    document.getElementById("prop-form").style.opacity = 1
+                    window.location.href = "/";
+                  }
+                  else{
+                    window.location.href = "addproperty";
+                    document.getElementById("error-message").style.display = "block"
+                  }
+                  setTimeout(function(){
+                     $('#alert').hide()
+                 }, 3000)
+               }
+             })
+            }
+
+
+      </script>
+  {% endblock body %}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <title>Flat Mate | Home</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static "img/favicon.ico" %}" type="image/x-icon">
+
+    <!-- Font awesome -->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">   
+    <!-- slick slider -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
+    <!-- price picker slider -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nouislider.css' %}">
+    <!-- Fancybox slider -->
+    <link rel="stylesheet" href="{% static 'css/jquery.fancybox.css' %}" type="text/css" media="screen" /> 
+    <!-- Theme color -->
+    <link id="switcher" href="{% static 'css/theme-color/default-theme.css' %}" rel="stylesheet">     
+
+    <!-- Main style sheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">    
+
+   
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    
+
+    <style>
+        * {
+          box-sizing: border-box;
+          font-family: Arial, sans-serif;
+        }
+        #checkbox-div label{
+          display:inline-block;
+        }
+        label {
+          display: inline-block;
+          margin-right: 10px; /* add some spacing between the inputs and labels */
+        }
+        
+        form {
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          padding: 20px;
+        }
+        
+        h1 {
+          text-align: center;
+          color: #2d2d2d;
+          margin-top: 0;
+        }
+        
+        label {
+          display: block;
+          margin-bottom: 5px;
+          color: #2d2d2d;
+          font-size: 18px;
+        }
+        
+        input[type="text"],
+        input[type="file"],
+        textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          margin-bottom: 10px;
+          font-size: 16px;
+        }
+        
+        input[type="submit"] {
+          background-color: #4CAF50;
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 18px;
+        }
+        
+        input[type="submit"]:hover {
+          background-color: #3e8e41;
+        }
+        
+        .error {
+          color: red;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+      </style>
+  </head>
+  <header>
+
+  <section id="aa-menu-area">
+    <nav class="navbar navbar-default main-navbar" role="navigation">  
+      <div class="container">
+        <div class="navbar-header">
+          <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- LOGO -->                                               
+          <!-- Text based logo -->
+           <a class="navbar-brand aa-logo" href="/"> FLAT <span>M4TE</span></a>
+           <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="img/logo.png" alt="logo"></a> -->
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
+            <li class="active"><a href="/">HOME</a></li>
+            <li><a href="{% url 'addproperty' %}">ADD PROPERTY</a></li>                                         
+          </ul>                            
+        </div><!--/.nav-collapse -->       
+      </div>          
+    </nav> 
+  </section>
+</header>
+  
+  {% block body %}{% endblock body %}
+      
+      <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+      <script src="{% static "js/jquery.min.js" %}"></script>   
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="{% static "js/bootstrap.js" %}"></script>   
+      <!-- slick slider -->
+      <script type="text/javascript" src="{% static "js/slick.js" %}"></script>
+      <!-- Price picker slider -->
+      <script type="text/javascript" src="{% static "js/nouislider.js" %}"></script>
+       <!-- mixit slider -->
+      <script type="text/javascript" src="{% static "js/jquery.mixitup.js" %}"></script>
+      <!-- Add fancyBox -->        
+      <script type="text/javascript" src="{% static "js/jquery.fancybox.pack.js" %}"></script>
+      <!-- Custom js -->
+      <script src="{% static "js/custom.js" %}"></script> 

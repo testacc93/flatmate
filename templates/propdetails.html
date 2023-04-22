@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <section style="background-image:{{ apartment.image.image }}" id="aa-property-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-property-header-inner">
+            <h2>Properties Details</h2>
+            <ol class="breadcrumb">
+            <li><a href="/">HOME</a></li>            
+            <li class="active">{{ apartment.prop_name }}</li>
+          </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+  <!-- End Proerty header  -->
+
+  <!-- Start Properties  -->
+  <section id="aa-properties">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-properties-content">            
+            <!-- Start properties content body -->
+            <div class="aa-properties-details">
+             <div class="aa-properties-details-img">
+                {% for image in apartment.image %}
+                <img src={{ image }} alt="img">
+               {% endfor %}
+             </div>
+             <div class="aa-properties-info">
+               <h2></h2>
+               <span class="aa-price">₹ {{ apartment.rent }}</span>
+               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptatibus veniam non voluptate, ipsa eius magni aliquid ratione sit, odio reprehenderit in quis repudiandae dolor.</p>
+               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet consequatur, veritatis, ducimus in aliquam magnam voluptatibus ullam libero fugiat temporibus at, aliquid explicabo placeat eligendi, assumenda magni saepe eius consequuntur.</p>
+               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium dicta aliquid, autem, cum, impedit nostrum, rem molestias quisquam ab iure enim totam? Itaque esse ut adipisci officiis nulla repellendus ratione dolore, iste ex doloribus tenetur eos provident quam quasi maxime.</p>
+               <h4>Propery Features</h4>
+               <ul>
+                {% for ame in apartment.desc %}
+                    <li>{{ ame }}</li>
+                 {% endfor %}
+               </ul>
+             </div>
+            </div>           
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+{% endblock body %}

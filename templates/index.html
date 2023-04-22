@@ -1,0 +1,442 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+  <body class="aa-price-range">  
+  <!-- Pre Loader -->
+  <div id="aa-preloader-area">
+    <div class="pulse"></div>
+  </div>
+  <!-- SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
+  <!-- END SCROLL TOP BUTTON -->
+
+  <!-- Start menu section -->
+  
+  <!-- End menu section -->
+
+  <!-- Start slider  -->
+  <section id="aa-slider">
+    <div class="aa-slider-area"> 
+      <!-- Top slider -->
+      <div class="aa-top-slider">
+        <!-- Top slider single slide -->
+        <div class="aa-top-slider-single">
+          <img style="opacity: 0.8;" src="{% static "img/gallery/big/wall.jpg" %}" alt="img">
+          <!-- Top slider content -->
+          <div class="aa-top-slider-content">
+            <span class="aa-top-slider-catg">NO</span>
+            <h2 class="aa-top-slider-title">BROKERAGE</h2>
+            {% comment %} <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i></p> {% endcomment %}
+            <span class="aa-top-slider-off">LIST PROPERTY</span>
+            <p class="aa-top-slider-price">GET A FLATMATE</p>
+            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+          </div>
+          <!-- / Top slider content -->
+        </div>
+        <!-- / Top slider single slide -->
+        <!-- Top slider single slide -->
+        <div class="aa-top-slider-single">
+          <img src="{% static "img/gallery/big/wall.jpeg" %}" alt="img">
+          <!-- Top slider content -->
+          <div class="aa-top-slider-content">
+            <span class="aa-top-slider-catg">Duplex</span>
+            <h2 class="aa-top-slider-title">1560 Square Feet</h2>
+            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
+            <span class="aa-top-slider-off">30% OFF</span>
+            <p class="aa-top-slider-price">$460,000</p>
+            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+          </div>
+          <!-- / Top slider content -->
+        </div>
+        <!-- / Top slider single slide -->
+        <!-- Top slider single slide -->
+        <div class="aa-top-slider-single">
+          <img src="{% static "img/gallery/big/wall.jpeg" %}" alt="img">
+          <!-- Top slider content -->
+          <div class="aa-top-slider-content">
+            <span class="aa-top-slider-catg">Duplex</span>
+            <h2 class="aa-top-slider-title">1560 Square Feet</h2>
+            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
+            <span class="aa-top-slider-off">30% OFF</span>
+            <p class="aa-top-slider-price">$460,000</p>
+            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+          </div>
+          <!-- / Top slider content -->
+        </div>
+        <!-- / Top slider single slide -->       
+         <!-- Top slider single slide -->
+        <div class="aa-top-slider-single">
+          <img src="{% static "img/gallery/big/wall.jpeg" %}" alt="img">
+          <!-- Top slider content -->
+          <div class="aa-top-slider-content">
+            <span class="aa-top-slider-catg">Duplex</span>
+            <h2 class="aa-top-slider-title">1560 Square Feet</h2>
+            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
+            <span class="aa-top-slider-off">30% OFF</span>
+            <p class="aa-top-slider-price">$460,000</p>
+            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+          </div>
+          <!-- / Top slider content -->
+        </div>
+        <!-- / Top slider single slide -->        
+         <!-- Top slider single slide -->
+        <div class="aa-top-slider-single">
+          <img src="{% static "img/gallery/big/wall.jpeg" %}" alt="img">
+          <!-- Top slider content -->
+          <div class="aa-top-slider-content">
+            <span class="aa-top-slider-catg">Duplex</span>
+            <h2 class="aa-top-slider-title">1560 Square Feet</h2>
+            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
+            <span class="aa-top-slider-off">30% OFF</span>
+            <p class="aa-top-slider-price">$460,000</p>
+            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+          </div>
+          <!-- / Top slider content -->
+        </div>
+        <!-- / Top slider single slide -->
+         <!-- Top slider single slide -->
+        <div class="aa-top-slider-single">
+          <img src="{% static "img/gallery/big/wall.jpeg" %}" alt="img">
+          <!-- Top slider content -->
+          <div class="aa-top-slider-content">
+            <span class="aa-top-slider-catg">Duplex</span>
+            <h2 class="aa-top-slider-title">1560 Square Feet</h2>
+            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
+            <span class="aa-top-slider-off">30% OFF</span>
+            <p class="aa-top-slider-price">$460,000</p>
+            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+          </div>
+          <!-- / Top slider content -->
+        </div>
+        <!-- / Top slider single slide -->
+      </div>
+    </div>
+  </section>
+  <!-- End slider  -->
+
+  <!-- Advance Search -->
+  <section id="aa-advance-search">
+    <div class="container">
+      <div class="aa-advance-search-area">
+        <div class="form">
+         <div class="aa-advance-search-top">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="aa-single-advance-search">
+                  <input id="location-search" type="text" placeholder="Type Your Location">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="aa-single-advance-search">
+                  <select id="flat-category">
+                    <option value="1">Furnished</option>
+                    <option value="2">Semi-Furnished</option>
+                    <option value="3">Unfurnished</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                 <div class="aa-single-advance-search">
+                  <select id="no-flat">
+                    <option value="1" selected>1 BHK</option>
+                    <option value="2">2 BHK</option>
+                    <option value="3">3 BHK</option>
+                    <option value="4">4 BHK</option>
+                    <option value="5">5 BHK</option>
+                  </select>
+              </div>
+              </div>
+              <div class="col-md-2">
+                 <!-- <div class="aa-single-advance-search">
+                  <select>
+                    <option value="0" selected>Type</option>
+                    <option value="1">Flat</option>
+                    <option value="2">Land</option>
+                    <option value="3">Plot</option>
+                    <option value="4">Commercial</option>
+                  </select>
+              </div> -->
+              </div>
+              <div class="col-md-2">
+                <div class="aa-single-advance-search">
+                <div id="csrf-token">{% csrf_token %}</div>
+
+                  <input id="search-btn" onclick="searchprop()" class="aa-search-btn" type="submit" value="Searcha">
+                </div>
+              </div>
+            </div>
+          </div>
+         <div class="aa-advance-search-bottom">
+           <div class="row">
+            {% comment %} <div class="col-md-6">
+              <div class="aa-single-filter-search">
+                <span>AREA (SQ)</span>
+                <span>FROM</span>
+                <span id="skip-value-lower" class="example-val">30.00</span>
+                <span>TO</span>
+                <span id="skip-value-upper" class="example-val">100.00</span>
+                <div id="aa-sqrfeet-range" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
+                </div>                  
+              </div>
+            </div> {% endcomment %}
+            {% comment %} <div class="col-md-12">
+              <div class="aa-single-filter-search">
+                <span>PRICE ($)</span>
+                <span>FROM</span>
+                <span id="skip-value-lower2" class="example-val">30.00</span>
+                <span>TO</span>
+                <span id="skip-value-upper2" class="example-val">100.00</span>
+                <div id="aa-price-range" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
+                </div>      
+              </div>
+            </div> {% endcomment %}
+          </div>  
+         </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="aa-latest-property">
+    <div class="container">
+      <div id="parent-element" class="aa-latest-property-area">
+        <div class="aa-title">
+          <h2>All Properties</h2>
+          <span></span>
+          <p>Choose from following properties</p>         
+        </div>
+        <div class="aa-latest-properties-content">
+          <div class="row">
+            {% for apartment in apartments %}
+            <div class="col-md-4">
+              <article class="aa-properties-item">
+                <a href="#" class="aa-properties-item-img">
+                  <img style="max-height:168px;" src={{ apartment.image.image.url }} alt="img">
+                </a>
+                <div class="aa-tag for-sale">
+                  {{ apartment.name }}
+                </div>
+                <div class="aa-properties-item-content">
+                  <div class="aa-properties-info">
+                    {% if apartment.furnishing == 1 %}
+                    <span>Furnished</span>
+                    {% endif %}
+                    {% if apartment.furnishing == 2 %}
+                    <span>Semi-Furnished</span>
+                    {% endif %}
+                    {% if apartment.furnishing == 3 %}
+                    <span>Unfurnished</span>
+                    {% endif %}
+                  </div>
+                  <div class="aa-properties-about">
+                    <h3><a href="#">{{ apartment.prop_name }}</a></h3>
+                    <p>{{ apartment.desc }}</p>                      
+                  </div>
+                  <div class="aa-properties-detial">
+                    <span class="aa-price">
+                      ₹ {{ apartment.rent }}
+                    </span>
+                    <a href="{% url 'propdetails' id=apartment.id %}"  class="aa-secondary-btn">View Details</a>
+                  </div>
+                </div>
+              </article>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / Latest property -->
+
+  <!-- Service section -->
+  
+  <!-- / Service section -->
+
+  <!-- Promo Banner Section -->
+  <section id="aa-promo-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-promo-banner-area">
+            <h3>Find Your Best Property</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, ex illum corporis quibusdam numquam quisquam optio explicabo. Officiis odit quia odio dignissimos eius repellat id!</p>
+            <a class="aa-view-btn">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <script>
+    function viewProp(){
+      var location_search = document.getElementById("location-search").value
+    }
+
+    function searchprop(){
+      document.getElementById("search-btn").style.opacity = 0.5
+
+      var location_search = document.getElementById("location-search").value
+      var flat_category = document.getElementById("flat-category").value
+      var no_flat = document.getElementById("no-flat").value
+
+      console.log(location_search)
+      console.log(flat_category)
+      console.log(no_flat)
+      const csrfTokenParentEle = document.getElementById('csrf-token').children;
+
+      const csrfToken = csrfTokenParentEle[0].value
+
+      const formData = new FormData();
+      formData.append('location_search', location_search.toString());
+      formData.append('flat_category', flat_category.toString());
+      formData.append('no_flat', no_flat.toString());
+      
+
+      $.ajax({
+              type: "POST",
+              url: "searchprop/",
+              headers: {
+                'X-CSRFToken': csrfToken // Include the CSRF token in the request headers
+              },
+              data: formData, 
+              contentType: false,
+              processData: false,
+               
+            //    processData: false,
+            //    contentType: false,
+               success: function(data){
+                document.getElementById("search-btn").disabled = false
+
+
+                    document.getElementById("search-btn").style.opacity = 1
+                    // window.location.href = "searchprop/?location=" + location_search + "?type=" + no_flat + "furnishing=" + flat_category;
+                    document.getElementById("parent-element").innerHTML = ""                    
+                    const parent_ele = document.getElementById("parent-element")
+                    const title_name = document.createElement("div");
+                    parent_ele.appendChild(title_name)
+
+
+                    title_name.className = "aa-title"
+                    const header_title = document.createElement('h2')
+                    var furnished_status = ""
+                    if (data['furnishing'] == 1){
+                      furnished_status = "Furnished"
+                    }
+
+                    if (data['furnishing'] == 2){
+                      furnished_status = "Semi-furnished"
+                    }
+
+                    if (data['furnishing'] == 3){
+                      console.log("inside 3333333")
+                      furnished_status = "Unfurnished"
+                    }
+                    if (data['location'] == "Ahmedabad"){
+                      header_title.innerHTML = "All properties in Ahmedabad"
+                    }
+                    else{
+                      header_title.innerHTML = data['no_flat'] + " bhk " + furnished_status + " properties in " + data['location'] 
+                    }
+                    title_name.appendChild(header_title)
+                    const p_choose = document.createElement("p")
+                    p_choose.innerText = "Choose"
+                    title_name.appendChild(p_choose)
+                    const aa_latest_properties_content = document.createElement("div")
+                    aa_latest_properties_content.className = "aa-latest-properties-content"
+                    parent_ele.appendChild(aa_latest_properties_content)
+                    const row_ele = document.createElement("div")
+                    row_ele.className = "row"
+                    aa_latest_properties_content.appendChild(row_ele)
+
+                    for(j=0; j < data['properties'].length; j++){
+                      const col_md_ele = document.createElement("div")
+                      col_md_ele.className = "col-md-4"
+                      row_ele.appendChild(col_md_ele)
+
+                      const aa_properties_item_article = document.createElement("article")
+                      aa_properties_item_article.className = "aa-properties-item"
+                      col_md_ele.appendChild(aa_properties_item_article)
+                      
+                      const a_ele = document.createElement("a")
+                      a_ele.setAttribute('href', '#')
+                      a_ele.className = "aa-properties-item-img"
+                      const prop_image = document.createElement("img")
+                      prop_image.src = data['properties'][j]['image']
+                      prop_image.style.maxHeight = "168px"
+                      a_ele.appendChild(prop_image)
+                      aa_properties_item_article.appendChild(a_ele)
+
+                      const aa_tag_for_sale = document.createElement("div")
+                      aa_tag_for_sale.classList.add("aa-tag", "for-sale")
+                      aa_tag_for_sale.innerText = data['properties'][j]['prop_name']
+                      aa_properties_item_article.appendChild(aa_tag_for_sale)
+                      
+                      const aa_latest_properties_content_2 = document.createElement("div")
+                      aa_latest_properties_content_2.className = "aa-properties-item-content"
+                      aa_properties_item_article.appendChild(aa_latest_properties_content_2)
+                      
+                      const aa_properties_info = document.createElement("div")
+                      aa_properties_info.className = "aa-properties-info"
+                      aa_latest_properties_content_2.appendChild(aa_properties_info)
+                      
+                      const span_furnish = document.createElement("span")
+                      if (data['properties'][j]['furnishing'] == 1){
+                        span_furnish.innerText = "Furnished"
+                      }
+                      if (data['properties'][j]['furnishing'] == 2){
+                        span_furnish.innerText = "Semi-furnished"
+                      }
+                      if (data['properties'][j]['furnishing'] == 3){
+                        span_furnish.innerText = "Unfurnished"
+                      }
+                      aa_properties_info.appendChild(span_furnish)
+                      
+                      const aa_properties_about = document.createElement("div")
+                      aa_properties_about.className = "aa-properties-about"
+                      aa_latest_properties_content_2.appendChild(aa_properties_about)
+
+                      const h3_ele = document.createElement("h3")
+                      h3_ele.innerText = data['properties'][j]['prop_name']
+                      aa_properties_about.appendChild(h3_ele)
+
+                      const a_ele_2 = document.createElement("a")
+                      a_ele_2.setAttribute('href', '#')
+                      h3_ele.appendChild(a_ele_2)
+
+                      const p_ele = document.createElement("p")
+                      p_ele.innerText = data['properties'][j]['desc']
+                      aa_properties_about.appendChild(p_ele)
+
+                      const aa_properties_detial = document.createElement("div")
+                      aa_properties_detial.className = "aa-properties-detial"
+                      aa_latest_properties_content_2.appendChild(aa_properties_detial)
+
+                      const aa_price_span = document.createElement("span")
+                      aa_price_span.className = "aa-price"
+                      aa_price_span.innerText = "₹ " + data['properties'][j]['rent']
+                      aa_properties_detial.appendChild(aa_price_span)
+
+                      const a_details = document.createElement("a")
+                      const prop_id = data['properties'][j]['id']
+                      console.log("sasasasa",prop_id)
+                      a_details.setAttribute('href', "{% url 'propdetails' id=1 %}".replace("1", prop_id))
+                      a_details.className = "aa-secondary-btn"
+                      a_details.innerText = "View details"
+                      aa_properties_detial.appendChild(a_details)
+                    }
+                    // $('body').html(data);
+                  setTimeout(function(){
+                     $('#alert').hide()
+                 }, 3000)
+               }
+             })
+
+    }
+  </script>
+
+
+
+  </body>
+  {% endblock body %}
