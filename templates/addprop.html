@@ -23,19 +23,43 @@
             <div class="aa-properties-details">
              <div id="prop-form" class="aa-properties-info">
                 <div id="csrf-token">{% csrf_token %}</div>
-                    <h1>Flat Details Form</h1>
+                    <h1>Flat Details</h1>
+
+                    <label for="contact_name">Contact Name:</label>
+                    <input type="text" placeholder="Ankur Kumar" id="contact_name" name="contact_name" required>
                     
-                    <label for="flat_pics">Flat Pictures:</label>
-                    <input type="file" class="flat_pics" id="flat_pics" name="flat_pics" accept="image/*" multiple required>
+                    <label for="contact_name">Contact Number:</label>
+                    <input type="text" placeholder="9876543210" id="contact_no" name="contact_no" required>
                     
-                    <label for="location">Name:</label>
-                    <input type="text" id="flat_name" name="flat_name" required>
+                    <label for="location">Flat type:</label>
+                    <input type="text" placeholder="4 BHK" id="flat_name" name="flat_name" required>
+
+                    <div id="gender-div" style="margin-top:9px; margin-bottom: 10px;">
+                      <label for="gender">For:</label><br>
+
+                      <input type="radio" id="female" name="gender" value="1">
+                      <label for="gender">Female</label><br>
+
+                      <input type="radio" id="male" name="gender" value="2">
+                      <label for="gender">Male</label><br>
+                    </div>
+
+                    {% comment %} <div id="gender-div" style="margin-top:9px; margin-bottom: 10px;">
+                      <label for="gender">For:</label><br>
+
+                      <input type="radio" id="female" name="female" value="1">
+                      <label for="gender">unfurnished</label><br>
+
+                      <input type="radio" id="semi-furnishing" name="furnishing" value="2">
+                      <label for="furnishing">Semi-furnished</label><br>
+                    </div> {% endcomment %}
+                    
 
                     <label for="location">Location:</label>
-                    <input type="text" id="location" name="location" required>
+                    <input type="text" placeholder="Bodakdev" id="location" name="location" required>
 
-                    <label for="rent">Rent:</label>
-                    <input type="text" id="rent" name="rent" required>
+                    <label for="rent">Rent per head:</label>
+                    <input type="text" placeholder="5000" id="rent" name="rent" required>
 
                     <div id="checkbox-div" style="margin-top:9px; margin-bottom: 10px;">
                       <label for="furnishing">Select furnishing:</label><br>
@@ -43,24 +67,24 @@
                       <input type="radio" id="furnishing" name="furnishing" value="3">
                       <label for="furnishing">unfurnished</label><br>
 
-                      <input type="radio" id="semi-furnishing" name="furnishing" value="1">
+                      <input type="radio" id="semi-furnishing" name="furnishing" value="2">
                       <label for="furnishing">Semi-furnished</label><br>
 
 
                       <input type="radio" id="fully-furnishing" name="furnishing" value="1">
                       <label for="furnishing">Fully-furnished</label><br>
                     </div>
-                    
+
                     <label for="amenities">Amenities:</label>
-                    <textarea id="amenities" name="amenities"></textarea>
+                    <input type="text" placeholder="AC, RO..." id="amenities" name="amenities" required>
 
                     
-                    <label for="contact_name">Contact Name:</label>
-                    <input type="text" id="contact_name" name="contact_name" required>
-                    
-                    <label for="contact_name">Contact:</label>
-                    <input type="text" id="contact_no" name="contact_no" required>
+                    <label for="describe">Describe(Optional):</label>
+                    <textarea id="describe" placeholder="We are 3 chilled mates, looking for 4th..."  name="describe"></textarea>
 
+                    <label for="flat_pics">Flat Pictures:</label>
+                    <input type="file" class="flat_pics" id="flat_pics" name="flat_pics" accept="image/*" multiple required>
+                    
                     <input id="submit-btn" onclick="submitform()" type="submit" value="Submit">
                     <div id="error-message" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
                       Please try again!
@@ -80,15 +104,23 @@
             form_ele.style.opacity = 0.2
             document.getElementById("submit-btn").disabled = true
             console.log("disable")
+
             var flat_name = document.getElementById("flat_name").value
             var location = document.getElementById("location").value
             var amenities = document.getElementById("amenities").value
             var contact_name = document.getElementById("contact_name").value
             var contact_no = document.getElementById("contact_no").value
             var rent = document.getElementById("rent").value
+            var desc = document.getElementById("describe").value
+            if (desc.length == 0){
+              desc = "We are chill people to stay with (:"
+            }
+
             // var furnishing = document.getElementById("furnishing").value
 
             var furn = $("input[type='radio'][name='furnishing']:checked").val();
+            var gender = $("input[type='radio'][name='gender']:checked").val();
+
 
             console.log(furn)
            
@@ -125,8 +157,8 @@
             formData.append('contact_no', contact_no.toString());
             formData.append('rent', rent.toString());
             formData.append('furnishing', furn.toString());
-
-
+            formData.append('desc', desc.toString());
+            formData.append('gender', gender.toString());
 
          
             $.ajax({

@@ -211,10 +211,16 @@
             <div class="col-md-4">
               <article class="aa-properties-item">
                 <a href="#" class="aa-properties-item-img">
-                  <img style="max-height:168px;" src={{ apartment.image.image.url }} alt="img">
+                  <img style="max-height:168px;" src={{ apartment.image }} alt="img">
                 </a>
                 <div class="aa-tag for-sale">
-                  {{ apartment.name }}
+                  {% if apartment.gender == 1%}
+                    Female
+                  {% endif %}
+                  {% if apartment.gender == 2%}
+                    Male
+                  {% endif %}
+                  
                 </div>
                 <div class="aa-properties-item-content">
                   <div class="aa-properties-info">

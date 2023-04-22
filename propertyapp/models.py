@@ -16,6 +16,10 @@ class Property(models.Model):
     (2, ("Semi-Furnished")),
     (3, ("Unfurnished")),
     )
+    gender = (
+    (1, ("Female")),
+    (2, ("Male")),
+    )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rent = models.IntegerField()
     prop_name = models.CharField(max_length=100)
@@ -23,6 +27,9 @@ class Property(models.Model):
     address = models.CharField(max_length=100)
     desc = models.TextField()
     furnishing = models.IntegerField(choices=FUR_CHOICES, default=1)
+    amenities = models.CharField(max_length=256, default='RO, Geyser')
+    gender = models.IntegerField(choices=gender, default=1)
+    
 
     def __str__(self) -> str:
         return self.prop_name
