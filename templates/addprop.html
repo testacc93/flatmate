@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %}Add your flat{% endblock title %}
 
 {% block body %}
 <section id="aa-property-header">
@@ -28,8 +29,7 @@
                     <label for="contact_name">Contact Name:</label>
                     <input type="text" placeholder="Ankur Kumar" id="contact_name" name="contact_name" required>
                     
-                    <label for="contact_name">Contact Number:</label>
-                    <input type="text" placeholder="9876543210" id="contact_no" name="contact_no" required>
+                    
                     
                     <label for="location">Flat type:</label>
                     <input type="text" placeholder="4 BHK" id="flat_name" name="flat_name" required>
@@ -43,17 +43,6 @@
                       <input type="radio" id="male" name="gender" value="2">
                       <label for="gender">Male</label><br>
                     </div>
-
-                    {% comment %} <div id="gender-div" style="margin-top:9px; margin-bottom: 10px;">
-                      <label for="gender">For:</label><br>
-
-                      <input type="radio" id="female" name="female" value="1">
-                      <label for="gender">unfurnished</label><br>
-
-                      <input type="radio" id="semi-furnishing" name="furnishing" value="2">
-                      <label for="furnishing">Semi-furnished</label><br>
-                    </div> {% endcomment %}
-                    
 
                     <label for="location">Location:</label>
                     <input type="text" placeholder="Bodakdev" id="location" name="location" required>
@@ -70,22 +59,43 @@
                       <input type="radio" id="semi-furnishing" name="furnishing" value="2">
                       <label for="furnishing">Semi-furnished</label><br>
 
-
                       <input type="radio" id="fully-furnishing" name="furnishing" value="1">
                       <label for="furnishing">Fully-furnished</label><br>
                     </div>
 
                     <label for="amenities">Amenities:</label>
                     <input type="text" placeholder="AC, RO..." id="amenities" name="amenities" required>
-
                     
                     <label for="describe">Describe(Optional):</label>
                     <textarea id="describe" placeholder="We are 3 chilled mates, looking for 4th..."  name="describe"></textarea>
 
                     <label for="flat_pics">Flat Pictures:</label>
                     <input type="file" class="flat_pics" id="flat_pics" name="flat_pics" accept="image/*" multiple required>
-                    
+
+                    <div>
+                      <label for="contact_name">Contact Number:</label>
+                      <input type="text" placeholder="9876543210" id="contact_no" name="contact_no" required>
+                      
+                      <input style="width:20%" id="otp-btn" onclick="sendOtp()" type="submit" value="Request OTP">
+
+                      <div style="width:20%; display:none; margin-top:10px" id="success-otp" class="alert alert-success" role="alert">
+                        OTP sent successfully!
+                      </div>
+                      
+                      <div style="width:20%; display:none; margin-top:10px" id="failed-otp" class="alert alert-danger" role="alert">
+                        Please try again!
+                      </div>
+                    </div>
+
+                    <label for="otp">OTP:</label>
+                    <input type="text" id="otp" name="otp" required>
+
                     <input id="submit-btn" onclick="submitform()" type="submit" value="Submit">
+                    
+                    <div id="please-wait" style="z-index:1000000;margin-top:10px; display: none;" class="alert alert-info" role="alert">
+                      <b>Please wait, m4te</b>
+                    </div>
+
                     <div id="error-message" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
                       Please try again!
                     </div>
@@ -99,10 +109,51 @@
     </div>
   </section>
     <script>
+        function sendOtp(){
+          var contact_no = document.getElementById("contact_no").value
+          const csrfTokenParentEle = document.getElementById('csrf-token').children;
+
+          const csrfToken = csrfTokenParentEle[0].value 
+          
+          const formData = new FormData();
+          formData.append('contact_no', contact_no.toString());
+
+          
+          $.ajax({
+            type: "POST",
+            url: "/sendotp/",
+            headers: {
+             'X-CSRFToken': csrfToken // Include the CSRF token in the request headers
+           },
+             data: formData,
+             contentType: false,
+             processData: false,
+            
+            success: function(data){
+             console.log(data['message'])
+               if (data['message']=='Success'){
+                document.getElementById("success-otp").style.display = "block"
+               }
+               else{
+                 document.getElementById("failed-otp").style.display = "block"
+               }
+               setTimeout(function(){
+                  $('#success-otp').hide()
+                  $('#failed-otp').hide()
+
+              }, 3000)
+            }
+          })
+          
+        }
+
         function submitform(){
-            var form_ele = document.getElementById("prop-form")
-            form_ele.style.opacity = 0.2
-            document.getElementById("submit-btn").disabled = true
+          var submit_btn = document.getElementById("submit-btn")
+          submit_btn.style.opacity = 0.2
+          document.getElementById("submit-btn").disabled = true
+          document.getElementById("please-wait").style.display = "block"
+          document.getElementById("please-wait").style.opacity = 1
+
             console.log("disable")
 
             var flat_name = document.getElementById("flat_name").value
@@ -112,6 +163,9 @@
             var contact_no = document.getElementById("contact_no").value
             var rent = document.getElementById("rent").value
             var desc = document.getElementById("describe").value
+            var otp = document.getElementById("otp").value
+
+
             if (desc.length == 0){
               desc = "We are chill people to stay with (:"
             }
@@ -159,6 +213,8 @@
             formData.append('furnishing', furn.toString());
             formData.append('desc', desc.toString());
             formData.append('gender', gender.toString());
+            formData.append('otp', otp.toString());
+
 
          
             $.ajax({
@@ -177,14 +233,18 @@
                 console.log(data['message'])
                   if (data['message']=='Success'){
                     document.getElementById("prop-form").style.opacity = 1
+                    document.getElementById("please-wait").innerText = "Successfully added the flat"
+
                     window.location.href = "/";
                   }
                   else{
-                    window.location.href = "addproperty";
                     document.getElementById("error-message").style.display = "block"
+                    document.getElementById("error-message").innerText = data['message']
+
                   }
                   setTimeout(function(){
-                     $('#alert').hide()
+                     $('#error-message').hide()
+
                  }, 3000)
                }
              })
@@ -193,3 +253,5 @@
 
       </script>
   {% endblock body %}
+
+

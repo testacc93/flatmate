@@ -1,12 +1,15 @@
 from django.shortcuts import render
-from .models import Property, Image, User
+from .models import Property, Image, User, Otp
 from django.http import JsonResponse
 from django.db.models import Q
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
+import boto3
+import random
+import datetime
 def index(request):
+
     apartments = Property.objects.all()
     all_properties = []
     for apartment in apartments:
@@ -34,9 +37,6 @@ def addproperty(request):
 
 
 def searchprop(request):
-    # location_search = request.GET.get('location')
-    # flat_category = request.GET.get('furnishing')
-    # no_flat = request.GET.get('type')
 
     location_search = request.POST['location_search']
     flat_category = request.POST['flat_category']
@@ -47,6 +47,7 @@ def searchprop(request):
         props = Property.objects.all()
     else:
         props = Property.objects.filter(Q(location__icontains=location_search) & Q(furnishing__icontains=flat_category) & Q(prop_name__icontains=no_flat))
+
     prop_id_lst = []
     for prop in props:
         flat_dict = {}
@@ -87,9 +88,10 @@ def propdetails(request, id):
 
     flat_details['desc'] = property.__dict__['desc']
     flat_details['user_name'] = property.__dict__['desc']
-
-    flat_details['user_contact'] = User.objects.get(id=property.__dict__['user_id']).phone
-
+    try:
+        flat_details['user_contact'] = User.objects.get(id=property.__dict__['user_id']).phone
+    except:
+        pass
 
     print(flat_details['desc'])
     
@@ -107,28 +109,35 @@ def submitprop(request):
     furnishing = request.POST['furnishing']
     desc = request.POST['desc']
     gender = request.POST['gender']
+    otp = request.POST['otp']
+
 
     print("=====================",desc)
 
     files = request.FILES.getlist('flat_pics')
 
-    try:
+    if checkotp(otp, contact_no):
 
-        user = User.objects.create(username=contact_name, phone=contact_no)
+        try:
 
-        prop = Property.objects.create(user=user,rent=rent,prop_name=flat_name,location=location,address="Ahmedabad", amenities=amenities, furnishing=furnishing, desc=desc, gender=gender)
-        prop.save()
+            user = User.objects.create(username=contact_name, phone=contact_no)
 
-        for file in files:
- 
-            print("prop saved")
-            image_save = Image.objects.create(image=file, property=prop)
-            image_save.save()
+            prop = Property.objects.create(user=user,rent=rent,prop_name=flat_name,location=location,address="Ahmedabad", amenities=amenities, furnishing=furnishing, desc=desc, gender=gender)
+            prop.save()
 
-        return JsonResponse({"message":"Success"})
+            for file in files:
+    
+                print("prop saved")
+                image_save = Image.objects.create(image=file, property=prop)
+                image_save.save()
 
-    except:
-        return JsonResponse({"message":"Failure"})
+            return JsonResponse({"message":"Success"})
+
+        except:
+            return JsonResponse({"message":"Failure"})
+    else:
+        return JsonResponse({"message":"Invalid OTP or OTP expired"})
+
 
     
 
@@ -151,4 +160,78 @@ def submitprop(request):
     # image_save = Image.objects.create(image=flat_pics, property=prop)
     # print(image_save)
 
+def checkotp(otp, phone):
+    otp_obj = Otp.objects.get(phone=phone)
+    user_otp = otp_obj.otp
+    timestamp_otp = str(otp_obj.timestamp)
+    current_time = datetime.datetime.utcnow()
+
+    new_ts_otp = datetime.datetime.strptime(timestamp_otp[:-6], '%Y-%m-%d %H:%M:%S.%f')
+
+    print("time new stamp",new_ts_otp)
+    print("sasaaaaaaaaa",current_time)
+
+
+    print(otp)
+    if user_otp == otp:
+        if (new_ts_otp - current_time).total_seconds() < 600 :
+            return True
+        else:
+            return False
+    else:
+        return False
     
+def about(request):
+    return render(request, 'about.html')
+
+client = boto3.client('sns', region_name='ap-northeast-1', aws_access_key_id='AKIA23KSK2536OIBMIOH',
+         aws_secret_access_key= '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')
+
+def sendotp(request):
+    contact_no = "+91"+request.POST['contact_no']
+    print("contact dw", contact_no)
+    otp = random.randrange(1000, 9999)
+    try:
+        otp_obj = Otp.objects.get(phone=request.POST['contact_no'])
+        otp_obj.otp = otp
+        otp_obj.timestamp = datetime.datetime.utcnow()
+        otp_obj.save()
+
+        message = "Hello your otp to add your flat is " + str(otp) + " - flatesmate.com"
+        
+        try:
+            response = client.publish(
+            PhoneNumber=contact_no,
+            Message=message,
+            Subject='OTP',
+            MessageStructure='string3',
+        
+            MessageDeduplicationId='string7',
+            MessageGroupId='string8'
+            )
+            return JsonResponse({"message":"Success"})
+        except:
+            return JsonResponse({"message":"failed"})
+    except:
+        otp = Otp.objects.create(phone=request.POST['contact_no'], otp=otp, timestamp = datetime.datetime.utcnow())
+        otp.save()
+        return JsonResponse({"message":"Success"})
+
+
+
+
+
+
+
+# def sendmessage():
+#     response = client.publish(
+#     PhoneNumber='+918856911982',
+#     Message='string1',
+#     Subject='string2',
+#     MessageStructure='string3',
+   
+#     MessageDeduplicationId='string7',
+#     MessageGroupId='string8'
+# )
+    
+    # return JsonResponse({"message":"success"})

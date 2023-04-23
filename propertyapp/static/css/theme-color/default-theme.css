@@ -268,6 +268,7 @@ h2 {
 
 .navbar-default .navbar-toggle {
   border-color: #59abe3;
+  background-color: aliceblue;
 }
 
 .navbar-default .navbar-toggle .icon-bar {

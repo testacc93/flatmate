@@ -2825,7 +2825,8 @@ img {
 @media (max-width: 767px) {
   .navbar-collapse.in {
     overflow-x: hidden;
-    background-color: #ddd;
+    background-color: #dfe5e9;
+    opacity: 0.5;
   }
 
   .container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {

@@ -1,13 +1,21 @@
 from django.db import models
 from storages.backends.s3boto3 import S3Boto3Storage
+import datetime
 
 class User(models.Model):
     username = models.CharField(max_length=100)
     phone = models.CharField(max_length=10)
-
+    
     def __str__(self) -> str:
         return self.username
 
+class Otp(models.Model):
+    phone = models.CharField(max_length=10)
+    otp = models.CharField(max_length=4, default='1234')
+    timestamp = models.DateTimeField(default=datetime.datetime.utcnow())
+
+    def __str__(self) -> str:
+        return self.phone
 
 class Property(models.Model):
 

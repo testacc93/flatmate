@@ -24,5 +24,3 @@ urlpatterns = [
     path('', include('propertyapp.urls')),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-print("sasaaaaaaaaaaaa",urlpatterns[1])

@@ -10,7 +10,6 @@ urlpatterns = [
     path('submitprop/', views.submitprop, name='submitprop'),
     re_path(r'^searchprop/$', views.searchprop, name='searchprop'),
     path('propdetails/<int:id>/', views.propdetails, name='propdetails'),
-    
-
-
+    path('about/', views.about, name='about'),
+    path('sendotp/', views.sendotp, name='sendotp'),
 ]
