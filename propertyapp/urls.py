@@ -12,4 +12,6 @@ urlpatterns = [
     path('propdetails/<int:id>/', views.propdetails, name='propdetails'),
     path('about/', views.about, name='about'),
     path('sendotp/', views.sendotp, name='sendotp'),
+    path('donate/', views.donate, name='donate'),
+
 ]

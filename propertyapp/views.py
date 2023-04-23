@@ -187,6 +187,9 @@ def about(request):
 client = boto3.client('sns', region_name='ap-northeast-1', aws_access_key_id='AKIA23KSK2536OIBMIOH',
          aws_secret_access_key= '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')
 
+def donate(request):
+    return render(request, 'donate.html')
+
 def sendotp(request):
     contact_no = "+91"+request.POST['contact_no']
     print("contact dw", contact_no)
