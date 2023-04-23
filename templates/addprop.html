@@ -109,6 +109,18 @@
     </div>
   </section>
     <script>
+      const contactNoInput = document.getElementById("contact_no");
+      contactNoInput.addEventListener("input", (event) => {
+        const value = event.target.value;
+        event.target.value = value.replace(/\D/g, "").slice(0, 10);
+      });
+
+      const rentInput = document.getElementById("rent");
+      rentInput.addEventListener("input", (event) => {
+        const value = event.target.value;
+        event.target.value = value.replace(/\D/g, "").slice(0, 10);
+      });
+
         function sendOtp(){
           var contact_no = document.getElementById("contact_no").value
           const csrfTokenParentEle = document.getElementById('csrf-token').children;
