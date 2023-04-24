@@ -8,6 +8,8 @@ from django.urls import reverse
 import boto3
 import random
 import datetime
+from decouple import config
+
 def index(request):
 
     apartments = Property.objects.all()
@@ -184,8 +186,8 @@ def checkotp(otp, phone):
 def about(request):
     return render(request, 'about.html')
 
-client = boto3.client('sns', region_name='ap-northeast-1', aws_access_key_id='AKIA23KSK2536OIBMIOH',
-         aws_secret_access_key= '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')
+client = boto3.client('sns', region_name='ap-northeast-1', aws_access_key_id=config('AWS_ACCESS_KEY_ID'),
+         aws_secret_access_key= config('AWS_SECRET_ACCESS_KEY'))
 
 def donate(request):
     return render(request, 'donate.html')
