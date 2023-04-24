@@ -64,7 +64,7 @@
                     </div>
 
                     <label for="amenities">Amenities:</label>
-                    <input type="text" placeholder="AC, RO..." id="amenities" name="amenities" required>
+                    <input type="text" placeholder="AC,RO..." id="amenities" name="amenities" required>
                     
                     <label for="describe">Describe(Optional):</label>
                     <textarea id="describe" placeholder="We are 3 chilled mates, looking for 4th..."  name="describe"></textarea>
@@ -109,6 +109,30 @@
     </div>
   </section>
     <script>
+
+
+
+    let flatNameInput = document.getElementById("flat_name");
+
+    flatNameInput.addEventListener("input", function() {
+      let flatNameValue = flatNameInput.value;
+      
+      // Convert all text to uppercase
+      flatNameValue = flatNameValue.toUpperCase();
+      
+      // Add a space between the number and text
+      flatNameValue = flatNameValue.replace(/(\d+)(\w+)/g, "$1 $2");
+      
+      flatNameInput.value = flatNameValue;
+    });
+
+      let amenitiesInput = document.getElementById("amenities");
+
+      amenitiesInput.addEventListener("input", function() {
+        let amenitiesText = amenitiesInput.value;
+        amenitiesText = amenitiesText.toUpperCase().replace(/\s+/g, ",");
+        amenitiesInput.value = amenitiesText;
+      });
       const contactNoInput = document.getElementById("contact_no");
       contactNoInput.addEventListener("input", (event) => {
         const value = event.target.value;

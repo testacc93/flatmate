@@ -215,7 +215,8 @@ def sendotp(request):
             MessageGroupId='string8'
             )
             return JsonResponse({"message":"Success"})
-        except:
+        except Exception as e:
+            print(str("-=================",e))
             return JsonResponse({"message":"failed"})
     except:
         otp = Otp.objects.create(phone=request.POST['contact_no'], otp=otp, timestamp = datetime.datetime.utcnow())
