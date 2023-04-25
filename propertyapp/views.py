@@ -192,6 +192,9 @@ client = boto3.client('sns', region_name='ap-northeast-1', aws_access_key_id=con
 def donate(request):
     return render(request, 'donate.html')
 
+def working(request):
+    return render(request, 'working.html')
+
 def sendotp(request):
     contact_no = "+91"+request.POST['contact_no']
     print("contact dw", contact_no)
