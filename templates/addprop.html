@@ -30,7 +30,6 @@
                     <input type="text" placeholder="Ankur Kumar" id="contact_name" name="contact_name" required>
                     
                     
-                    
                     <label for="location">Flat type:</label>
                     <input type="text" placeholder="4 BHK" id="flat_name" name="flat_name" required>
 
@@ -184,23 +183,57 @@
         }
 
         function submitform(){
+
+          var flat_name = document.getElementById("flat_name").value;
+          var location = document.getElementById("location").value;
+          var amenities = document.getElementById("amenities").value;
+          var contact_name = document.getElementById("contact_name").value;
+          var contact_no = document.getElementById("contact_no").value;
+          var rent = document.getElementById("rent").value;
+          var desc = document.getElementById("describe").value;
+          var otp = document.getElementById("otp").value;
+
+          if (flat_name.trim() === '') {
+              alert('Flat Name is empty');
+              return;
+          }
+
+          if (location.trim() === '') {
+              alert('Location is empty');
+              return;
+          }
+
+          if (amenities.trim() === '') {
+              alert('Amenities is empty');
+              return;
+          }
+
+          if (contact_name.trim() === '') {
+              alert('Contact Name is empty');
+              return;
+          }
+
+          if (contact_no.trim() === '') {
+              alert('Contact Number is empty');
+              return;
+          }
+
+          if (rent.trim() === '') {
+              alert('Rent is empty');
+              return;
+          }
+
+          if (otp.trim() === '') {
+              alert('OTP is empty');
+              return;
+          }
+          
+
           var submit_btn = document.getElementById("submit-btn")
           submit_btn.style.opacity = 0.2
           document.getElementById("submit-btn").disabled = true
           document.getElementById("please-wait").style.display = "block"
           document.getElementById("please-wait").style.opacity = 1
-
-            console.log("disable")
-
-            var flat_name = document.getElementById("flat_name").value
-            var location = document.getElementById("location").value
-            var amenities = document.getElementById("amenities").value
-            var contact_name = document.getElementById("contact_name").value
-            var contact_no = document.getElementById("contact_no").value
-            var rent = document.getElementById("rent").value
-            var desc = document.getElementById("describe").value
-            var otp = document.getElementById("otp").value
-
 
             if (desc.length == 0){
               desc = "We are chill people to stay with (:"
