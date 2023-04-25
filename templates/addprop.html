@@ -28,10 +28,17 @@
 
                     <label for="contact_name">Contact Name:</label>
                     <input type="text" placeholder="Ankur Kumar" id="contact_name" name="contact_name" required>
+                    <div id="error-message-contact-name" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
+                      Contact name needs to be filled.
+                    </div>
+
                     
                     
                     <label for="location">Flat type:</label>
                     <input type="text" placeholder="4 BHK" id="flat_name" name="flat_name" required>
+                    <div id="error-message-flat-type" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
+                      Flat type needs to be filled.
+                    </div>
 
                     <div id="gender-div" style="margin-top:9px; margin-bottom: 10px;">
                       <label for="gender">For:</label><br>
@@ -42,17 +49,26 @@
                       <input type="radio" id="male" name="gender" value="2">
                       <label for="gender">Male</label><br>
                     </div>
+                    <div id="error-message-gender" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
+                      Gender needs to be filled.
+                    </div>
 
                     <label for="location">Location:</label>
                     <input type="text" placeholder="Bodakdev" id="location" name="location" required>
+                    <div id="error-message-location" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
+                      Location needs to be filled.
+                    </div>
 
                     <label for="rent">Rent per head:</label>
                     <input type="text" placeholder="5000" id="rent" name="rent" required>
+                    <div id="error-message-rent" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
+                      Rent needs to be filled.
+                    </div>
 
                     <div id="checkbox-div" style="margin-top:9px; margin-bottom: 10px;">
                       <label for="furnishing">Select furnishing:</label><br>
 
-                      <input type="radio" id="furnishing" name="furnishing" value="3">
+                      <input type="radio" id="unfurnishing" name="furnishing" value="3">
                       <label for="furnishing">unfurnished</label><br>
 
                       <input type="radio" id="semi-furnishing" name="furnishing" value="2">
@@ -61,9 +77,15 @@
                       <input type="radio" id="fully-furnishing" name="furnishing" value="1">
                       <label for="furnishing">Fully-furnished</label><br>
                     </div>
+                    <div id="error-message-furn" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
+                      Furnishing needs to be filled.
+                    </div>
 
                     <label for="amenities">Amenities:</label>
                     <input type="text" placeholder="AC,RO..." id="amenities" name="amenities" required>
+                    <div id="error-message-ame" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
+                      Amenities needs to be filled.
+                    </div>
                     
                     <label for="describe">Describe(Optional):</label>
                     <textarea id="describe" placeholder="We are 3 chilled mates, looking for 4th..."  name="describe"></textarea>
@@ -74,12 +96,16 @@
                     <div>
                       <label for="contact_name">Contact Number:</label>
                       <input type="text" placeholder="9876543210" id="contact_no" name="contact_no" required>
+                      <div id="error-message-contact" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
+                        Contact number needs to be filled.
+                      </div>
                       
                       <input id="otp-btn" onclick="sendOtp()" type="submit" value="Request OTP">
 
                       <div style="width:20%; display:none; margin-top:10px" id="success-otp" class="alert alert-success" role="alert">
                         OTP sent successfully!
                       </div>
+                      
                       
                       <div style="width:20%; display:none; margin-top:10px" id="failed-otp" class="alert alert-danger" role="alert">
                         Please try again!
@@ -88,6 +114,9 @@
 
                     <label for="otp">OTP:</label>
                     <input type="text" id="otp" name="otp" required>
+                    <div id="error-message-otp" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
+                      OTP needs to be filled.
+                    </div>
 
                     <input id="submit-btn" onclick="submitform()" type="submit" value="Submit">
                     
@@ -192,39 +221,121 @@
           var rent = document.getElementById("rent").value;
           var desc = document.getElementById("describe").value;
           var otp = document.getElementById("otp").value;
+          var furn = $("input[type='radio'][name='furnishing']:checked").val();
+          var gender = $("input[type='radio'][name='gender']:checked").val();
+
+          console.log("=========", flat_name)
+
+          if (contact_name.trim() === '') {
+              document.getElementById('error-message-contact-name').style.display = "block"
+              document.getElementById("error-message").innerText = "Please check the form"
+              document.getElementById("error-message").style.display = "block"
+              setTimeout(function(){
+                     $('#error-message-contact-name').hide()
+                     $('#error-message').hide()
+
+                 }, 3000)
+              return;
+          }
 
           if (flat_name.trim() === '') {
-              alert('Flat Name is empty');
+              document.getElementById('error-message-flat-type').style.display = "block"
+              document.getElementById("error-message").innerText = "Please check the form"
+              document.getElementById("error-message").style.display = "block"
+              setTimeout(function(){
+                     $('#error-message-flat-type').hide()
+                     $('#error-message').hide()
+
+
+                 }, 3000)
+              return;
+          }
+          if (!(document.getElementById('male').checked || document.getElementById('female').checked) ) {
+            document.getElementById('error-message-gender').style.display = "block"
+              document.getElementById("error-message").innerText = "Please check the form"
+              document.getElementById("error-message").style.display = "block"
+              setTimeout(function(){
+                     $('#error-message-gender').hide()
+                     $('#error-message').hide()
+
+                 }, 3000)
               return;
           }
 
           if (location.trim() === '') {
-              alert('Location is empty');
+            document.getElementById('error-message-location').style.display = "block"
+            document.getElementById("error-message").innerText = "Please check the form"
+            document.getElementById("error-message").style.display = "block"
+              setTimeout(function(){
+                     $('#error-message-location').hide()
+                     $('#error-message').hide()
+
+
+                 }, 3000)
+              return;
+          }
+          if (rent.trim() === '') {
+            document.getElementById('error-message-rent').style.display = "block"
+            document.getElementById("error-message").innerText = "Please check the form"
+            document.getElementById("error-message").style.display = "block"
+              setTimeout(function(){
+                     $('#error-message-rent').hide()
+                     $('#error-message').hide()
+
+
+                 }, 3000)
+              return;
+          }
+          if (!(document.getElementById('semi-furnishing').checked || document.getElementById('fully-furnishing').checked || document.getElementById('unfurnishing').checked)) {
+            document.getElementById('error-message-furn').style.display = "block"
+              document.getElementById("error-message").innerText = "Please check the form"
+              document.getElementById("error-message").style.display = "block"
+              setTimeout(function(){
+                     $('#error-message-gender').hide()
+                     $('#error-message').hide()
+
+                 }, 3000)
               return;
           }
 
           if (amenities.trim() === '') {
-              alert('Amenities is empty');
+            document.getElementById('error-message-ame').style.display = "block"
+            document.getElementById("error-message").innerText = "Please check the form"
+            document.getElementById("error-message").style.display = "block"
+              setTimeout(function(){
+                     $('#error-message-ame').hide()
+                     $('#error-message').hide()
+
+
+                 }, 3000)
               return;
           }
 
-          if (contact_name.trim() === '') {
-              alert('Contact Name is empty');
-              return;
-          }
+          if (contact_no.trim() === '' || contact_no.length != 10 ) {
+            document.getElementById('error-message-contact').style.display = "block"
+            document.getElementById("error-message").innerText = "Please check the form"
+            document.getElementById("error-message").style.display = "block"
+              setTimeout(function(){
+                     $('#error-message-contact').hide()
+                     $('#error-message').hide()
 
-          if (contact_no.trim() === '') {
-              alert('Contact Number is empty');
-              return;
-          }
 
-          if (rent.trim() === '') {
-              alert('Rent is empty');
+                 }, 3000)
               return;
           }
+          
+          
 
           if (otp.trim() === '') {
-              alert('OTP is empty');
+            document.getElementById('error-message-otp').style.display = "block"
+            document.getElementById("error-message").innerText = "Please check the form"
+            document.getElementById("error-message").style.display = "block"
+              setTimeout(function(){
+                     $('#error-message-otp').hide()
+                     $('#error-message').hide()
+
+
+                 }, 3000)
               return;
           }
           
@@ -241,8 +352,7 @@
 
             // var furnishing = document.getElementById("furnishing").value
 
-            var furn = $("input[type='radio'][name='furnishing']:checked").val();
-            var gender = $("input[type='radio'][name='gender']:checked").val();
+            
 
 
             console.log(furn)
