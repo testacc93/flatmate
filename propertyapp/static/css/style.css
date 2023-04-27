@@ -206,7 +206,7 @@ img {
   padding-top: 20px;
   position: absolute;
   right: 0;
-  top: 35px;
+  top: 15px;
   width: 100%;
   z-index: 99;
 }
@@ -244,7 +244,7 @@ img {
   transition: all 0.5s;
 }
 #aa-menu-area .main-navbar .navbar-nav .active a {
-  background-color: #FFF;
+  /* background-color: #FFF; */
 }
 #aa-menu-area .main-navbar .navbar-nav .open a {
   background-color: #fff;
@@ -2826,7 +2826,7 @@ img {
 @media (max-width: 767px) {
   .navbar-collapse.in {
     overflow-x: hidden;
-    background-color: #dfe5e9;
+    background-color: #ffffff;
     opacity: 0.5;
   }
 

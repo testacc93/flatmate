@@ -28,8 +28,10 @@ def index(request):
         flat_dict['desc'] = apartment.__dict__['desc']
         flat_dict['furnishing'] = apartment.__dict__['furnishing']
         flat_dict['gender'] = apartment.__dict__['gender']
-
-        flat_dict['image'] = image.image.url
+        try:
+            flat_dict['image'] = image.image.url
+        except:
+            pass
         all_properties.append(flat_dict)
 
     return render(request, 'index.html', {'apartments' : all_properties})
@@ -43,12 +45,55 @@ def searchprop(request):
     location_search = request.POST['location_search']
     flat_category = request.POST['flat_category']
     no_flat = request.POST['no_flat']
+    print("=====",location_search)
+    print(flat_category)
+    print(no_flat)
+    
+    if flat_category == "0":
+        flat_category = ""
+    if no_flat == "0":
+        no_flat = ""
 
-    if location_search == "":
-        location_search = "Ahmedabad"
-        props = Property.objects.all()
-    else:
-        props = Property.objects.filter(Q(location__icontains=location_search) & Q(furnishing__icontains=flat_category) & Q(prop_name__icontains=no_flat))
+    props = Property.objects.all()
+
+
+    if location_search != "":
+        print("elif 33")
+
+        props = props.filter(Q(location__icontains=location_search))
+
+    if flat_category != "":
+        print("elif 1")
+        props = props.filter(Q(furnishing__icontains=flat_category))
+
+    if no_flat != "":
+        print("elif 2")
+
+        props = props.filter(Q(prop_name__icontains=no_flat))
+    
+    
+    # if location_search != "" and flat_category != "":
+    #     print("elif 3")
+
+    #     props = props.filter(Q(location__icontains=location_search) & Q(furnishing__icontains=flat_category))
+    
+    # if flat_category != "" and no_flat !="" :
+    #     print("elif 4")
+
+    #     props = props.filter(Q(furnishing__icontains=flat_category) & Q(prop_name__icontains=no_flat))
+
+    # elif location_search != "" and no_flat !="" :
+    #     print("elif 5")
+
+    #     props = props.filter(Q(location__icontains=location_search) & Q(prop_name__icontains=no_flat))
+    # if location_search == "":
+    #     print("elif 6")
+
+    #     location_search = "Ahmedabad"
+    #     props = Property.objects.all()
+        
+
+
 
     prop_id_lst = []
     for prop in props:
@@ -64,8 +109,10 @@ def searchprop(request):
         flat_dict['address'] = prop.__dict__['address']
         flat_dict['desc'] = prop.__dict__['desc']
         flat_dict['furnishing'] = prop.__dict__['furnishing']
-        flat_dict['image'] = image.image.url
-        
+        try:
+            flat_dict['image'] = image.image.url
+        except:
+            pass    
         prop_id_lst.append(flat_dict)
     
         
@@ -189,13 +236,17 @@ def about(request):
 client = boto3.client('sns', region_name='ap-northeast-1', aws_access_key_id=config('AWS_ACCESS_KEY_ID'),
          aws_secret_access_key= config('AWS_SECRET_ACCESS_KEY'))
 
+
+
 def donate(request):
     return render(request, 'donate.html')
 
 def working(request):
     return render(request, 'working.html')
 
+
 def sendotp(request):
+
     contact_no = "+91"+request.POST['contact_no']
     print("contact dw", contact_no)
     otp = random.randrange(1000, 9999)
@@ -217,9 +268,10 @@ def sendotp(request):
             MessageDeduplicationId='string7',
             MessageGroupId='string8'
             )
+            
             return JsonResponse({"message":"Success"})
         except Exception as e:
-            print(str("-=================",e))
+            print(str("-=================",str(e)))
             return JsonResponse({"message":"failed"})
     except:
         otp = Otp.objects.create(phone=request.POST['contact_no'], otp=otp, timestamp = datetime.datetime.utcnow())
