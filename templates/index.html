@@ -41,6 +41,7 @@
               <div class="col-md-3">
                 <div class="aa-single-advance-search">
                   <select id="flat-category">
+                    <option value="0"  selected>Any</option>
                     <option value="1">Furnished</option>
                     <option value="2">Semi-Furnished</option>
                     <option value="3">Unfurnished</option>
@@ -50,7 +51,9 @@
               <div class="col-md-3">
                 <div class="aa-single-advance-search">
                   <select id="no-flat">
-                    <option value="1" selected>1 BHK</option>
+                    <option value="0"  selected>Any</option>
+                    <option value="1">1 BHK</option>
+
                     <option value="2">2 BHK</option>
                     <option value="3">3 BHK</option>
                     <option value="4">4 BHK</option>
@@ -73,7 +76,7 @@
                 <div class="aa-single-advance-search">
                   <div id="csrf-token">{% csrf_token %}</div>
 
-                  <input id="search-btn" onclick="searchprop()" class="aa-search-btn" type="submit" value="Searcha">
+                  <input id="search-btn" onclick="searchprop()" class="aa-search-btn" type="submit" value="Search">
                 </div>
               </div>
             </div>
@@ -188,6 +191,7 @@
       var location_search = document.getElementById("location-search").value
       var flat_category = document.getElementById("flat-category").value
       var no_flat = document.getElementById("no-flat").value
+      
 
       console.log(location_search)
       console.log(flat_category)
@@ -201,7 +205,6 @@
       formData.append('flat_category', flat_category.toString());
       formData.append('no_flat', no_flat.toString());
 
-
       $.ajax({
         type: "POST",
         url: "searchprop/",
@@ -211,15 +214,11 @@
         data: formData,
         contentType: false,
         processData: false,
-
-        //    processData: false,
-        //    contentType: false,
         success: function (data) {
           document.getElementById("search-btn").disabled = false
 
 
           document.getElementById("search-btn").style.opacity = 1
-          // window.location.href = "searchprop/?location=" + location_search + "?type=" + no_flat + "furnishing=" + flat_category;
           document.getElementById("parent-element").innerHTML = ""
           const parent_ele = document.getElementById("parent-element")
           const title_name = document.createElement("div");
@@ -229,6 +228,9 @@
           title_name.className = "aa-title"
           const header_title = document.createElement('h2')
           var furnished_status = ""
+          if (data['no_flat'] == ""){
+            data['no_flat'] = "All"
+          }
           if (data['furnishing'] == 1) {
             furnished_status = "Furnished"
           }
@@ -238,7 +240,6 @@
           }
 
           if (data['furnishing'] == 3) {
-            console.log("inside 3333333")
             furnished_status = "Unfurnished"
           }
           if (data['location'] == "Ahmedabad") {
@@ -247,6 +248,7 @@
           else {
             header_title.innerHTML = data['no_flat'] + " bhk " + furnished_status + " properties in " + data['location']
           }
+          header_title.innerHTML = "Results"
           title_name.appendChild(header_title)
           const p_choose = document.createElement("p")
           p_choose.innerText = "Choose"
