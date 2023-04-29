@@ -1,6 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block title %}About flat{% endblock title %}
 
 {% block body %}
   <section style="background-image:{{ apartment.image.image }}" id="aa-property-header">
@@ -21,7 +19,6 @@
   <!-- End Proerty header  -->
 
   <!-- Start Properties  -->
-  
   <section id="aa-properties">
     <div class="container">
       <div class="row">
@@ -30,11 +27,14 @@
             <!-- Start properties content body -->
             <div class="aa-properties-details">
              <div class="aa-properties-details-img">
-                {% if apartment.image.0 %}
-                  <img src={{ apartment.image.0 }} alt="img">
-                  {% else %}
-                  <img src="{% static 'img/gallery/big/noimg.png' %}" alt="img">
-                  {% endif %}
+              {% if apartment.image.0 %}
+                {% for image in apartment.image %}
+                  <img src={{ image }} alt="img">
+                {% endfor %}
+                {% else %}
+                <img src="{% static 'img/gallery/big/noimg.png' %}" alt="img">  
+              {% endif %}
+                
              </div>
              <div class="aa-properties-info">
                <h2></h2>
