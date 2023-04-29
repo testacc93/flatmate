@@ -29,7 +29,7 @@
                     <h1>Flat Details</h1>
 
                     <label for="contact_name">Contact Name:</label>
-                    <input type="text" placeholder="Ankur Kumar" id="contact_name" name="contact_name" required>
+                    <input type="text" placeholder="Ankur" id="contact_name" name="contact_name" required>
                     <div id="error-message-contact-name" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
                       Contact name needs to be filled.
                     </div>
@@ -56,7 +56,7 @@
                     </div>
 
                     <label for="location">Location:</label>
-                    <input type="text" placeholder="Bodakdev" id="location" name="location" required>
+                    <input type="text" placeholder="Bodakdev, Ahmedabad" id="location" name="location" required>
                     <div id="error-message-location" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
                       Location needs to be filled.
                     </div>
@@ -84,7 +84,7 @@
                     </div>
 
                     <label for="amenities">Amenities:</label>
-                    <input type="text" placeholder="AC,RO..." id="amenities" name="amenities" required>
+                    <input type="text" placeholder="FAN, WATER..." id="amenities" name="amenities" required>
                     <div id="error-message-ame" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
                       Amenities needs to be filled.
                     </div>
@@ -102,7 +102,7 @@
                         Contact number needs to be filled.
                       </div>
                       
-                      <input id="otp-btn" onclick="sendOtp()" type="submit" value="Request OTP">
+                      {% comment %} <input id="otp-btn" onclick="sendOtp()" type="submit" value="Request OTP"> {% endcomment %}
 
                       <div style="width:20%; display:none; margin-top:10px" id="success-otp" class="alert alert-success" role="alert">
                         OTP sent successfully!
@@ -114,8 +114,8 @@
                       </div>
                     </div>
 
-                    <label for="otp">OTP:</label>
-                    <input type="text" id="otp" name="otp" required>
+                    {% comment %} <label for="otp">OTP:</label> {% endcomment %}
+                    {% comment %} <input type="text" id="otp" name="otp" required> {% endcomment %}
                     <div id="error-message-otp" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
                       OTP needs to be filled.
                     </div>
@@ -139,6 +139,30 @@
     </div>
   </section>
     <script>
+      const amenitiesInput = document.getElementById('amenities');
+
+      amenitiesInput.addEventListener('input', function() {
+        const value = this.value;
+        const capitalizedValue = value.toUpperCase();
+        this.value = capitalizedValue;
+      });
+
+      const locationInput = document.getElementById('location');
+
+locationInput.addEventListener('input', function() {
+  const value = this.value;
+  const words = value.split(/\s+/);
+  const capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+  this.value = capitalizedWords.join(' ');
+});
+
+
+locationInput.addEventListener('keydown', function(event) {
+  const key = event.keyCode || event.charCode;
+  if (key === 8 && this.value.length === 1) {
+    this.value = '';
+  }
+});
 
 
 
@@ -156,13 +180,8 @@
       flatNameInput.value = flatNameValue;
     });
 
-      let amenitiesInput = document.getElementById("amenities");
+    
 
-      amenitiesInput.addEventListener("input", function() {
-        let amenitiesText = amenitiesInput.value;
-        amenitiesText = amenitiesText.toUpperCase().replace(/\s+/g, ",");
-        amenitiesInput.value = amenitiesText;
-      });
       const contactNoInput = document.getElementById("contact_no");
       contactNoInput.addEventListener("input", (event) => {
         const value = event.target.value;
@@ -222,9 +241,10 @@
           var contact_no = document.getElementById("contact_no").value;
           var rent = document.getElementById("rent").value;
           var desc = document.getElementById("describe").value;
-          var otp = document.getElementById("otp").value;
+          {% comment %} var otp = document.getElementById("otp").value; {% endcomment %}
           var furn = $("input[type='radio'][name='furnishing']:checked").val();
           var gender = $("input[type='radio'][name='gender']:checked").val();
+          var otp = '1234'
 
           console.log("=========", flat_name)
 

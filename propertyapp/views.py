@@ -165,27 +165,27 @@ def submitprop(request):
 
     files = request.FILES.getlist('flat_pics')
 
-    if checkotp(otp, contact_no):
+    # if checkotp(otp, contact_no):
 
-        try:
+    try:
 
-            user = User.objects.create(username=contact_name, phone=contact_no)
+        user = User.objects.create(username=contact_name, phone=contact_no)
 
-            prop = Property.objects.create(user=user,rent=rent,prop_name=flat_name,location=location,address="Ahmedabad", amenities=amenities, furnishing=furnishing, desc=desc, gender=gender)
-            prop.save()
+        prop = Property.objects.create(user=user,rent=rent,prop_name=flat_name,location=location,address="Ahmedabad", amenities=amenities, furnishing=furnishing, desc=desc, gender=gender)
+        prop.save()
 
-            for file in files:
-    
-                print("prop saved")
-                image_save = Image.objects.create(image=file, property=prop)
-                image_save.save()
+        for file in files:
 
-            return JsonResponse({"message":"Success"})
+            print("prop saved")
+            image_save = Image.objects.create(image=file, property=prop)
+            image_save.save()
 
-        except:
-            return JsonResponse({"message":"Failure"})
-    else:
-        return JsonResponse({"message":"Invalid OTP or OTP expired"})
+        return JsonResponse({"message":"Success"})
+
+    except:
+        return JsonResponse({"message":"Failure"})
+    # else:
+    #     return JsonResponse({"message":"Invalid OTP or OTP expired"})
 
 
     
