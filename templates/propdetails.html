@@ -29,8 +29,8 @@
             <!-- Start properties content body -->
             <div class="aa-properties-details">
              <div class="aa-properties-details-img">
-                {% if apartment.image %}
-                  <img src={{ apartment.image }} alt="img">
+                {% if apartment.image.image %}
+                  <img src={{ apartment.image.image }} alt="img">
                   {% else %}
                   <img src="{% static 'img/gallery/big/noimg.png' %}" alt="img">
                   {% endif %}
