@@ -104,7 +104,12 @@
             <div class="col-md-4">
               <article class="aa-properties-item">
                 <a href="#" class="aa-properties-item-img">
+                  {% if apartment.image %}
                   <img style="max-height:168px;" src={{ apartment.image }} alt="img">
+                  {% else %}
+                  <img style="max-height:168px;" src="{% static 'img/gallery/big/noimg.png' %}" alt="img">
+                  {% endif %}
+
                 </a>
                 <div class="aa-tag for-sale">For
                   {% if apartment.gender == 1%}
