@@ -134,7 +134,7 @@
                   </div>
                   <div class="aa-properties-about">
                     <h3><a href="{% url 'propdetails' id=apartment.id %}">{{ apartment.prop_name }}</a></h3>
-                    <p>{{ apartment.desc }}</p>
+                    <p>{{ apartment.desc | truncatechars:20 }}</p>
                   </div>
                   <div class="aa-properties-detial">
                     <span class="aa-price">
