@@ -103,11 +103,11 @@
             {% for apartment in apartments %}
             <div class="col-md-4">
               <article class="aa-properties-item">
-                <a href="#" class="aa-properties-item-img">
+                <a href="{% url 'propdetails' id=apartment.id %}" class="aa-properties-item-img">
                   {% if apartment.image %}
-                  <img style="max-height:168px;" src={{ apartment.image }} alt="img">
+                  <img style="max-height:148px;" src={{ apartment.image }} alt="img">
                   {% else %}
-                  <img style="max-height:168px;" src="{% static 'img/gallery/big/noimg.png' %}" alt="img">
+                  <img style="max-height:148px;" src="{% static 'img/gallery/big/noimg.png' %}" alt="img">
                   {% endif %}
 
                 </a>

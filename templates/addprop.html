@@ -102,7 +102,7 @@
                         Contact number needs to be filled.
                       </div>
                       
-                      {% comment %} <input id="otp-btn" onclick="sendOtp()" type="submit" value="Request OTP"> {% endcomment %}
+                      <input id="otp-btn" onclick="sendOtp()" type="submit" value="Request OTP">
 
                       <div style="width:20%; display:none; margin-top:10px" id="success-otp" class="alert alert-success" role="alert">
                         OTP sent successfully!
@@ -114,8 +114,8 @@
                       </div>
                     </div>
 
-                    {% comment %} <label for="otp">OTP:</label> {% endcomment %}
-                    {% comment %} <input type="text" id="otp" name="otp" required> {% endcomment %}
+                    <label for="otp">OTP:</label>
+                    <input type="text" id="otp" name="otp" required>
                     <div id="error-message-otp" style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert">
                       OTP needs to be filled.
                     </div>
@@ -241,10 +241,9 @@ locationInput.addEventListener('keydown', function(event) {
           var contact_no = document.getElementById("contact_no").value;
           var rent = document.getElementById("rent").value;
           var desc = document.getElementById("describe").value;
-          {% comment %} var otp = document.getElementById("otp").value; {% endcomment %}
+          var otp = document.getElementById("otp").value;
           var furn = $("input[type='radio'][name='furnishing']:checked").val();
           var gender = $("input[type='radio'][name='gender']:checked").val();
-          var otp = '1234'
 
           console.log("=========", flat_name)
 
@@ -441,11 +440,14 @@ locationInput.addEventListener('keydown', function(event) {
                   else{
                     document.getElementById("error-message").style.display = "block"
                     document.getElementById("error-message").innerText = data['message']
-
+                    submit_btn.style.opacity = 1
+                    document.getElementById("submit-btn").disabled = false
                   }
                   setTimeout(function(){
+                    
                      $('#error-message').hide()
-
+                     $('#please-wait').hide()
+                     $('#error-message').hide()
                  }, 3000)
                }
              })
